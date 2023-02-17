@@ -1,0 +1,30 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: alpine
+    steps:
+      - checkout # git clone ...
+      - run:
+          name: "Build the service"
+          command: |
+            echo "Hello this is build step"
+            ls
+            pwd
+            cat README.md
+            echo "docker build -t ..."
+
+  test:
+    docker:
+      - image: alpine
+    steps:
+      - run:
+          name: "Test step"
+          command: |
+            echo "Hello this is test step"
+workflows:
+  welcome:
+    jobs:
+      - build
+      - test
